@@ -1,0 +1,783 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.hsc {
+  --paper: #faf7f2;
+  --paper-2: #f3eee5;
+  --card: #ffffff;
+  --ink: #16140f;
+  --ink-2: #3b372f;
+  --muted: #6f6a60;
+  --line: #e6dfd2;
+  --line-2: #d9d0bf;
+  --red: #b3121f;
+  --red-2: #d4232f;
+  --red-soft: #fbeceb;
+  --gold: #b8914a;
+  --green: #1d7a4f;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", "Hind Siliguri", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bn: "Hind Siliguri", "Inter", system-ui, sans-serif;
+  --r: 20px;
+  --shadow: 0 1px 2px rgba(22, 20, 15, .04), 0 12px 32px -12px rgba(22, 20, 15, .14);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.hsc *, .hsc *::before, .hsc *::after { box-sizing: border-box; }
+.hsc img { max-width: 100%; display: block; }
+.hsc a { color: inherit; text-decoration: none; }
+.hsc button { font: inherit; color: inherit; cursor: pointer; }
+.hsc h1, .hsc h2, .hsc h3, .hsc p { margin: 0; }
+.hsc .bn { font-family: var(--bn); }
+.hsc .wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 768px) { .hsc .wrap { padding: 0 32px; } }
+
+/* ---------- Shared type ---------- */
+.hsc .kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--red);
+}
+.hsc .kicker::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.hsc .h2 {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.02em;
+  font-size: clamp(28px, 4.2vw, 44px); line-height: 1.12; margin-top: 14px;
+}
+.hsc .h2.bn { font-family: var(--bn); font-weight: 700; letter-spacing: 0; line-height: 1.3; font-size: clamp(24px, 3.6vw, 36px); }
+.hsc .h2 em { font-style: italic; color: var(--red); }
+.hsc .sub { color: var(--muted); margin-top: 12px; max-width: 620px; font-size: 16px; }
+.hsc .section { padding: 72px 0; }
+@media (min-width: 900px) { .hsc .section { padding: 104px 0; } }
+.hsc .section.alt { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.hsc .section.dark { background: var(--ink); color: #f4efe6; }
+.hsc .section.dark .sub { color: #b4ad9f; }
+.hsc .head { margin-bottom: 40px; }
+.hsc .head.center { text-align: center; }
+.hsc .head.center .sub { margin-left: auto; margin-right: auto; }
+.hsc .head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; margin-bottom: 40px; }
+.hsc .head-row .head { margin-bottom: 0; }
+
+/* ---------- Buttons ---------- */
+.hsc .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 50px; padding: 0 24px; border-radius: 999px; border: 1px solid transparent;
+  font-weight: 600; font-size: 15px; white-space: nowrap;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.hsc .btn:active { transform: scale(.98); }
+.hsc .btn-red { background: var(--red); color: #fff; box-shadow: 0 10px 24px -10px rgba(179, 18, 31, .7); }
+.hsc .btn-red:hover { background: var(--red-2); }
+.hsc .btn-ink { background: var(--ink); color: #fff; }
+.hsc .btn-ink:hover { background: #2b2820; }
+.hsc .btn-line { border-color: var(--line-2); background: transparent; color: var(--ink); }
+.hsc .btn-line:hover { border-color: var(--ink); }
+.hsc .btn-sm { height: 40px; padding: 0 18px; font-size: 14px; }
+.hsc .btn-block { width: 100%; }
+.hsc .link { font-weight: 600; font-size: 15px; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: border-color .2s, color .2s; }
+.hsc .link:hover { color: var(--red); border-color: var(--red); }
+
+/* ---------- Hero ---------- */
+.hsc .hero { position: relative; padding: 56px 0 72px; overflow: hidden; }
+@media (min-width: 900px) { .hsc .hero { padding: 88px 0 104px; } }
+.hsc .hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(700px 360px at 50% -80px, rgba(179, 18, 31, .09), transparent 70%),
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 64px;
+  mask-image: linear-gradient(#000, transparent 85%);
+  -webkit-mask-image: linear-gradient(#000, transparent 85%);
+  opacity: .7;
+}
+.hsc .hero-top { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
+.hsc .pill {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px;
+  border: 1px solid var(--line-2); border-radius: 999px; background: var(--card);
+  font-size: 13px; font-weight: 600; color: var(--ink-2);
+}
+.hsc .live { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(179, 18, 31, .5); animation: hscPulse 1.8s infinite; }
+@keyframes hscPulse { 70% { box-shadow: 0 0 0 8px rgba(179, 18, 31, 0); } 100% { box-shadow: 0 0 0 0 rgba(179, 18, 31, 0); } }
+.hsc h1 {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.035em; line-height: 1.02;
+  font-size: clamp(40px, 8vw, 84px); margin-top: 22px;
+}
+.hsc h1 .yr { display: block; font-size: .42em; letter-spacing: .18em; font-family: var(--sans); font-weight: 700; color: var(--muted); margin-bottom: 10px; }
+.hsc h1 em { font-style: italic; color: var(--red); font-weight: 500; }
+.hsc .tagline { font-family: var(--bn); font-size: clamp(18px, 2.4vw, 22px); font-weight: 600; color: var(--ink-2); margin-top: 18px; }
+.hsc .hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+
+.hsc .posters { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 900px; margin: 48px auto 0; }
+@media (min-width: 700px) { .hsc .posters { gap: 24px; margin-top: 64px; } }
+.hsc .poster {
+  display: block; border-radius: 16px; overflow: hidden; background: var(--card);
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s;
+}
+@media (min-width: 700px) { .hsc .poster { border-radius: var(--r); } }
+.hsc .poster img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.hsc .poster figcaption { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 14px; font-weight: 600; font-size: 13px; }
+@media (min-width: 700px) { .hsc .poster figcaption { padding: 16px 20px; font-size: 15px; } }
+.hsc .poster figcaption span:last-child { color: var(--red); transition: transform .2s; }
+.hsc .poster:hover { transform: translateY(-6px); box-shadow: 0 2px 4px rgba(22, 20, 15, .05), 0 28px 50px -20px rgba(22, 20, 15, .3); }
+.hsc .poster:hover figcaption span:last-child { transform: translateX(4px); }
+.hsc .poster figure { margin: 0; }
+
+/* ---------- Offer ---------- */
+.hsc .offer {
+  position: relative; display: grid; gap: 0; border-radius: 28px; overflow: hidden;
+  background: var(--ink); color: #f4efe6; box-shadow: 0 30px 70px -30px rgba(22, 20, 15, .55);
+}
+@media (min-width: 900px) { .hsc .offer { grid-template-columns: 1.1fr 1fr; } }
+.hsc .offer > div { padding: 32px 22px; }
+@media (min-width: 600px) { .hsc .offer > div { padding: 44px; } }
+.hsc .offer .kicker { color: #e8b86b; }
+.hsc .offer-l { position: relative; }
+.hsc .offer-l::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(500px 300px at 0% 0%, rgba(179, 18, 31, .35), transparent 70%);
+}
+.hsc .offer-l > * { position: relative; z-index: 1; }
+.hsc .price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; margin-top: 18px; }
+.hsc .price b { font-family: var(--serif); font-weight: 600; font-size: clamp(52px, 9vw, 76px); line-height: 1; letter-spacing: -.03em; }
+.hsc .price b small { font-size: .5em; margin-left: 4px; color: #e8b86b; }
+.hsc .price s { color: #8f887b; font-size: 20px; font-weight: 500; }
+.hsc .price .save { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: rgba(232, 184, 107, .14); color: #e8b86b; padding: 5px 10px; border-radius: 999px; }
+.hsc .offer-note { font-family: var(--bn); color: #cfc8ba; margin-top: 16px; font-size: 16px; }
+.hsc .offer-note strong { color: #fff; }
+.hsc .coupon {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px;
+  padding: 14px 14px 14px 20px; border: 1.5px dashed rgba(232, 184, 107, .55); border-radius: 16px;
+  background: rgba(255, 255, 255, .03); cursor: pointer; transition: border-color .2s, background .2s; text-align: left; width: 100%;
+}
+.hsc .coupon:hover { border-color: #e8b86b; background: rgba(232, 184, 107, .06); }
+.hsc .coupon small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: #8f887b; }
+.hsc .coupon code { font-family: var(--sans); font-size: 24px; font-weight: 800; letter-spacing: .06em; color: #fff; }
+.hsc .coupon .copy { flex: none; height: 40px; padding: 0 18px; border-radius: 999px; background: #e8b86b; color: var(--ink); font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; font-family: var(--bn); }
+.hsc .coupon.copied { border-color: #5fc795; border-style: solid; }
+.hsc .coupon.copied .copy { background: #5fc795; }
+.hsc .offer-r { background: #1f1c16; border-top: 1px solid #2e2a22; display: flex; flex-direction: column; justify-content: center; }
+@media (min-width: 900px) { .hsc .offer-r { border-top: 0; border-left: 1px solid #2e2a22; } }
+.hsc .ending { font-family: var(--bn); font-weight: 600; font-size: 17px; display: flex; align-items: center; gap: 10px; }
+.hsc .count { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 18px 0 28px; }
+@media (min-width: 600px) { .hsc .count { gap: 12px; } }
+.hsc .count div { background: #2a261e; border: 1px solid #3a352b; border-radius: 14px; padding: 14px 4px 10px; text-align: center; }
+.hsc .count b { display: block; font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 6vw, 40px); line-height: 1; font-variant-numeric: tabular-nums; }
+.hsc .count span { display: block; margin-top: 8px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #8f887b; }
+.hsc .count div:last-child b { color: #ff6b6b; }
+.hsc .offer-r .fine { margin-top: 14px; font-size: 13px; color: #8f887b; text-align: center; }
+
+/* ---------- Courses ---------- */
+.hsc .grid3 { display: grid; gap: 20px; }
+@media (min-width: 700px) { .hsc .grid3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .hsc .grid3 { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+.hsc .course {
+  display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r); overflow: hidden; transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.hsc .course:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--line-2); }
+.hsc .course .thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--paper-2); overflow: hidden; }
+.hsc .course .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.hsc .course:hover .thumb img { transform: scale(1.04); }
+.hsc .badge { position: absolute; top: 12px; left: 12px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; }
+.hsc .badge.gold { background: #e8b86b; color: var(--ink); }
+.hsc .course .body { display: flex; flex-direction: column; gap: 10px; padding: 22px; flex: 1; }
+.hsc .course .meta { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.hsc .course h3 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.25; letter-spacing: -.01em; }
+.hsc .course .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+.hsc .course .row b { font-size: 20px; font-weight: 800; }
+.hsc .course .row s { color: var(--muted); font-size: 14px; margin-left: 6px; }
+.hsc .course .start { font-size: 14px; color: var(--muted); }
+.hsc .course .start:hover { color: var(--red); }
+
+/* ---------- Why ---------- */
+.hsc .why { display: grid; gap: 1px; background: #2e2a22; border: 1px solid #2e2a22; border-radius: var(--r); overflow: hidden; }
+@media (min-width: 900px) { .hsc .why { grid-template-columns: repeat(3, 1fr); } }
+.hsc .why article { background: var(--ink); padding: 32px 26px; transition: background .3s; }
+@media (min-width: 600px) { .hsc .why article { padding: 40px 34px; } }
+.hsc .why article:hover { background: #1f1c16; }
+.hsc .why .num { font-family: var(--serif); font-style: italic; font-size: 44px; line-height: 1; color: #e8b86b; }
+.hsc .why h3 { font-family: var(--bn); font-weight: 700; font-size: 21px; line-height: 1.4; margin-top: 22px; color: #fff; }
+.hsc .why p { font-family: var(--bn); color: #b4ad9f; margin-top: 12px; font-size: 16px; line-height: 1.75; }
+.hsc .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; text-align: center; }
+.hsc .stat-strip b { display: block; font-family: var(--serif); font-size: clamp(28px, 5vw, 44px); font-weight: 600; color: #fff; line-height: 1.1; }
+.hsc .stat-strip span { font-family: var(--bn); font-size: 14px; color: #8f887b; }
+
+/* ---------- Weekly tracker ---------- */
+.hsc .tracker { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 900px) { .hsc .tracker { grid-template-columns: .9fr 1.1fr; gap: 64px; } }
+.hsc .tracker .try { display: inline-block; margin-top: 18px; font-weight: 800; font-size: 15px; letter-spacing: .04em; color: var(--red); background: var(--red-soft); border: 1px solid #f3cfcc; padding: 8px 16px; border-radius: 10px; }
+.hsc .tracker-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; box-shadow: var(--shadow); }
+@media (min-width: 600px) { .hsc .tracker-card { padding: 32px; } }
+.hsc .bar { height: 8px; border-radius: 99px; background: var(--paper-2); overflow: hidden; }
+.hsc .bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--red), var(--red-2)); transition: width 1.2s cubic-bezier(.2, .8, .2, 1); }
+.hsc .bar-lbl { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.hsc .weeks { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 22px; }
+.hsc .weeks div {
+  position: relative; aspect-ratio: 1; border-radius: 12px; display: grid; place-items: center;
+  font-size: 13px; font-weight: 700; border: 1px solid var(--line); color: var(--muted); background: var(--paper);
+}
+.hsc .weeks .done { background: var(--ink); color: #fff; border-color: var(--ink); }
+.hsc .weeks .now { background: var(--red); color: #fff; border-color: var(--red); box-shadow: 0 0 0 4px var(--red-soft); }
+.hsc .weeks .now::after { content: "NEW"; position: absolute; top: -8px; right: -6px; font-size: 9px; letter-spacing: .06em; background: #e8b86b; color: var(--ink); padding: 2px 5px; border-radius: 6px; }
+.hsc .legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 22px; font-family: var(--bn); font-size: 14px; color: var(--ink-2); }
+.hsc .legend span { display: inline-flex; align-items: center; gap: 8px; }
+.hsc .legend i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.hsc .tracker-foot { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); font-family: var(--bn); font-weight: 600; display: flex; gap: 10px; align-items: flex-start; }
+
+/* ---------- Video ---------- */
+.hsc .vids { display: grid; gap: 20px; }
+@media (min-width: 800px) { .hsc .vids { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.hsc .vid { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.hsc .player { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.hsc .player button { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: #000; }
+.hsc .player img { width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: opacity .3s, transform .6s; }
+.hsc .player button:hover img { opacity: 1; transform: scale(1.03); }
+.hsc .player .play {
+  position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%;
+  background: rgba(255, 255, 255, .95); display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  transition: transform .25s cubic-bezier(.3, 1.4, .5, 1);
+}
+.hsc .player button:hover .play { transform: scale(1.1); }
+.hsc .player .play svg { width: 24px; height: 24px; margin-left: 4px; fill: var(--red); }
+.hsc .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.hsc .vid .cap { padding: 18px 22px 20px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.hsc .vid .cap small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.hsc .vid .cap h3 { font-family: var(--bn); font-size: 19px; font-weight: 700; margin-top: 4px; line-height: 1.35; }
+.hsc .vid .cap span { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.hsc .vid.wide { max-width: 860px; margin: 0 auto; }
+
+.hsc .foundation { display: grid; gap: 12px; margin-top: 24px; }
+@media (min-width: 800px) { .hsc .foundation { grid-template-columns: repeat(3, 1fr); } }
+.hsc .fd {
+  display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--card);
+  border: 1px solid var(--line); border-radius: 16px; transition: border-color .2s, transform .2s;
+}
+.hsc .fd:hover { border-color: var(--ink); transform: translateY(-2px); }
+.hsc .fd .ic { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--paper-2); }
+.hsc .fd .ic svg { width: 18px; height: 18px; fill: var(--red); margin-left: 2px; }
+.hsc .fd small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.hsc .fd b { display: block; font-weight: 600; font-size: 15px; line-height: 1.35; margin-top: 2px; }
+
+/* ---------- Resources ---------- */
+.hsc .res { display: grid; gap: 20px; }
+@media (min-width: 900px) { .hsc .res { grid-template-columns: 1fr 1.4fr; gap: 24px; } }
+.hsc .res-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
+.hsc .res-card h3 { font-family: var(--serif); font-weight: 600; font-size: 26px; letter-spacing: -.01em; }
+.hsc .res-card p { color: var(--muted); margin-top: 6px; font-size: 15px; }
+.hsc .res-links { display: grid; gap: 10px; margin-top: 22px; }
+.hsc .res-links.three { grid-template-columns: repeat(3, 1fr); }
+.hsc .res-links a {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px;
+  border: 1px solid var(--line); border-radius: 14px; font-weight: 600; transition: border-color .2s, background .2s;
+}
+.hsc .res-links a:hover { border-color: var(--ink); background: var(--paper); }
+.hsc .res-links a span:last-child { color: var(--red); }
+.hsc .res-links.three a { flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 18px 16px; }
+.hsc .res-links.three a em { font-style: normal; font-size: 26px; line-height: 1; }
+.hsc .res-links.three a small { font-size: 13px; font-weight: 600; color: var(--red); }
+@media (max-width: 420px) {
+  .hsc .res-links.three { gap: 8px; }
+  .hsc .res-links.three a { padding: 14px 12px; font-size: 14px; }
+}
+.hsc .res-all { display: inline-flex; margin-top: 18px; }
+
+/* ---------- Reviews ---------- */
+.hsc .reviews { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 16px 24px; scroll-padding-inline: 16px; scrollbar-width: thin; }
+@media (min-width: 768px) { .hsc .reviews { padding-inline: 32px; scroll-padding-inline: 32px; } }
+@media (min-width: 1160px) { .hsc .reviews { padding-left: calc((100% - 1160px) / 2 + 32px); scroll-padding-left: calc((100% - 1160px) / 2 + 32px); } }
+.hsc .reviews::-webkit-scrollbar { height: 6px; }
+.hsc .reviews::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 9px; }
+.hsc .reviews button {
+  flex: none; width: 190px; padding: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  background: var(--card); scroll-snap-align: start; transition: transform .25s, box-shadow .25s;
+}
+@media (min-width: 700px) { .hsc .reviews button { width: 230px; } }
+.hsc .reviews button:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.hsc .reviews img { width: 100%; aspect-ratio: 9 / 17; object-fit: cover; object-position: top; }
+.hsc .scroll-btns { display: none; gap: 8px; }
+@media (min-width: 700px) { .hsc .scroll-btns { display: flex; } }
+.hsc .scroll-btns button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--card); font-size: 18px; transition: border-color .2s; }
+.hsc .scroll-btns button:hover { border-color: var(--ink); }
+.hsc .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(12, 11, 8, .92); display: none; place-items: center; padding: 20px; }
+.hsc .lightbox.open { display: grid; }
+.hsc .lightbox img { max-height: 92vh; width: auto; border-radius: 14px; }
+.hsc .lightbox button { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .12); color: #fff; font-size: 22px; }
+
+/* ---------- Contact ---------- */
+.hsc .contact { display: grid; gap: 28px; align-items: center; text-align: center; }
+@media (min-width: 900px) { .hsc .contact { grid-template-columns: 1.3fr 1fr; text-align: left; } }
+.hsc .contact .h2 { color: #fff; }
+.hsc .contact-actions { display: flex; flex-direction: column; gap: 12px; }
+.hsc .wa {
+  display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 18px;
+  background: #1f1c16; border: 1px solid #2e2a22; transition: border-color .2s;
+}
+.hsc .wa:hover { border-color: #5fc795; }
+.hsc .wa .ic { flex: none; width: 48px; height: 48px; border-radius: 50%; background: #25d366; display: grid; place-items: center; }
+.hsc .wa .ic svg { width: 24px; height: 24px; fill: #fff; }
+.hsc .wa small { display: block; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #8f887b; text-align: left; }
+.hsc .wa b { display: block; font-size: 22px; font-weight: 700; letter-spacing: .02em; color: #fff; text-align: left; }
+
+/* ---------- Sticky mobile CTA ---------- */
+.hsc .sticky {
+  position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 900;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 10px 10px 18px; border-radius: 999px; background: rgba(22, 20, 15, .94);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #fff;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, .5);
+  transform: translateY(140%); transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+.hsc .sticky.show { transform: none; }
+.hsc .sticky b { font-size: 18px; }
+.hsc .sticky s { color: #8f887b; font-size: 13px; margin-left: 6px; }
+.hsc .sticky .btn { height: 44px; }
+@media (min-width: 900px) { .hsc .sticky { display: none; } }
+
+/* ---------- Reveal ---------- */
+.hsc .rv { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2, .8, .2, 1), transform .8s cubic-bezier(.2, .8, .2, 1); }
+.hsc .rv.in { opacity: 1; transform: none; }
+.hsc .rv.d1 { transition-delay: .08s; } .hsc .rv.d2 { transition-delay: .16s; } .hsc .rv.d3 { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  .hsc *, .hsc *::before, .hsc *::after { animation: none !important; transition: none !important; }
+  .hsc .rv { opacity: 1; transform: none; }
+}
+</style>
+
+<div class="hsc" id="hsc26"
+     data-price="2570" data-regular="3070" data-coupon="Skip400" data-off="400"
+     data-deadline=""
+     data-weeks-done="5" data-weeks-total="12">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <span class="pill rv"><span class="live"></span> Enrollment open · Engineering & Varsity</span>
+        <h1 class="rv d1"><span class="yr">HSC 26</span>Compact <em>Admission</em></h1>
+        <p class="tagline rv d2">সংক্ষেপে সবকিছু একখানেই</p>
+        <div class="hero-cta rv d3">
+          <a class="btn btn-red" href="#hsc-courses">Choose your batch →</a>
+          <a class="btn btn-line" href="#hsc-demos">Watch a demo class</a>
+        </div>
+      </div>
+
+      <div class="posters">
+        <a class="poster rv" href="https://ededcourses.com/courses/ceb26/" target="_blank" rel="noopener">
+          <figure>
+            <img src="https://ededcourses.com/wp-content/uploads/2026/08/IMG_4416.jpg" alt="Compact Engineering Batch 26" width="600" height="600">
+            <figcaption><span>Engineering Batch</span><span>→</span></figcaption>
+          </figure>
+        </a>
+        <a class="poster rv d1" href="https://ededcourses.com/courses/cvb26/" target="_blank" rel="noopener">
+          <figure>
+            <img src="https://ededcourses.com/wp-content/uploads/2026/08/IMG_4414.jpg" alt="Compact Varsity + GST Batch 26" width="600" height="600">
+            <figcaption><span>Varsity + GST Batch</span><span>→</span></figcaption>
+          </figure>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ OFFER ============ -->
+  <section class="section" style="padding-top:0" id="hsc-offer">
+    <div class="wrap">
+      <div class="offer rv">
+        <div class="offer-l">
+          <span class="kicker">Limited offer</span>
+          <div class="price">
+            <b data-f="price">2570<small>৳</small></b>
+            <s data-f="regular">3070৳</s>
+            <span class="save" data-f="save">Save 500৳</span>
+          </div>
+          <p class="offer-note">কুপন ব্যবহার করলে আরও <strong data-f="off">৪০০ টাকা</strong> ডিসকাউন্ট পাবে!</p>
+          <button class="coupon" type="button" data-copy aria-label="Copy coupon code">
+            <span><small>SPECIAL COUPON</small><code data-f="coupon">Skip400</code></span>
+            <span class="copy" data-copy-label>কপি করো</span>
+          </button>
+        </div>
+        <div class="offer-r">
+          <p class="ending"><span class="live"></span> সময় শেষ হচ্ছে...</p>
+          <div class="count" data-count>
+            <div><b>00</b><span>Days</span></div>
+            <div><b>00</b><span>Hours</span></div>
+            <div><b>00</b><span>Min</span></div>
+            <div><b>00</b><span>Sec</span></div>
+          </div>
+          <a class="btn btn-red btn-block" href="#hsc-courses">Enroll now →</a>
+          <p class="fine">Pay with bKash, Nagad or card · Instant access</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COURSES ============ -->
+  <section class="section alt" id="hsc-courses">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="kicker">01 · Batches</span>
+        <h2 class="h2">Pick the batch that <em>fits your target</em></h2>
+        <p class="sub">Physics, Chemistry and Math, taught compact and question-bank first. Take one track, or both with the combo.</p>
+      </div>
+      <div class="grid3">
+        <article class="course rv">
+          <a class="thumb" href="https://ededcourses.com/courses/ceb26/">
+            <img src="https://ededcourses.com/wp-content/uploads/2026/07/final-768x429.jpg" alt="Compact Engineering Batch 26" loading="lazy">
+          </a>
+          <div class="body">
+            <span class="meta">Phy · Chem · Math</span>
+            <h3><a href="https://ededcourses.com/courses/ceb26/">Compact Engineering Batch 26</a></h3>
+            <div class="row">
+              <span><b>2570৳</b><s>4070৳</s></span>
+              <a class="btn btn-ink btn-sm" href="https://ededcourses.com/courses/ceb26/">Enroll</a>
+            </div>
+            <a class="start" href="https://ededcourses.com/courses/ceb26/lesson/course-tutorial-33638/">Already enrolled? Start learning →</a>
+          </div>
+        </article>
+        <article class="course rv d1">
+          <a class="thumb" href="https://ededcourses.com/courses/cvb26/">
+            <img src="https://ededcourses.com/wp-content/uploads/2026/07/varsity-final-768x429.png" alt="Compact Varsity + GST Batch 26" loading="lazy">
+          </a>
+          <div class="body">
+            <span class="meta">Phy · Chem · Math</span>
+            <h3><a href="https://ededcourses.com/courses/cvb26/">Compact Varsity + GST Batch 26</a></h3>
+            <div class="row">
+              <span><b>2570৳</b><s>4070৳</s></span>
+              <a class="btn btn-ink btn-sm" href="https://ededcourses.com/courses/cvb26/">Enroll</a>
+            </div>
+            <a class="start" href="https://ededcourses.com/courses/cvb26/lesson/course-tutorial/">Already enrolled? Start learning →</a>
+          </div>
+        </article>
+        <article class="course rv d2">
+          <a class="thumb" href="https://ededcourses.com/courses/combo26/">
+            <span class="badge gold">Best value</span>
+            <img src="https://ededcourses.com/wp-content/uploads/2026/08/Red-and-Yellow-Bold-Typographic-Youtube-Thumbnail--768x432.png" alt="Admission Combo Batch 26" loading="lazy">
+          </a>
+          <div class="body">
+            <span class="meta">Engineering + Varsity + GST</span>
+            <h3><a href="https://ededcourses.com/courses/combo26/">Admission Combo Batch 26</a></h3>
+            <div class="row">
+              <span><b>3970৳</b><s>5070৳</s></span>
+              <a class="btn btn-red btn-sm" href="https://ededcourses.com/courses/combo26/">Enroll</a>
+            </div>
+            <a class="start" href="https://ededcourses.com/courses/combo26/lesson/course-tutorial-33648/">Already enrolled? Start learning →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section class="section dark">
+    <div class="wrap">
+      <div class="head center rv">
+        <span class="kicker" style="color:#e8b86b">02 · Why EDED</span>
+        <h2 class="h2 bn" style="color:#fff">কেন কমপ্যাক্ট ইঞ্জিনিয়ারিং এবং ভার্সিটি ব্যাচ আলাদা?</h2>
+      </div>
+      <div class="why">
+        <article class="rv">
+          <div class="num">01</div>
+          <h3>প্রতিটি অধ্যায়ের কমপ্যাক্ট ক্লাস</h3>
+          <p>প্রতিটি অধ্যায়ের ক্লাসগুলো গড়ে ২ থেকে ৩ ঘণ্টার হয়ে থাকে। আর এই ক্লাসগুলো থেকে ভর্তি পরীক্ষায় আমরা গত ৩ বছর ধরে ধারাবাহিকভাবে ৮০% কমন দিয়ে আসছি।</p>
+        </article>
+        <article class="rv d1">
+          <div class="num">02</div>
+          <h3>প্রশ্নব্যাংক কেন্দ্রিক ও কমন উপযোগী প্রস্তুতি</h3>
+          <p>আমরা প্রশ্নব্যাংকের সবচেয়ে গুরুত্বপূর্ণ ও সিলেক্টিভ ম্যাথগুলো করাই, যা থেকে পরীক্ষায় সরাসরি কমন পাওয়ার সম্ভাবনা থাকে সর্বোচ্চ।</p>
+        </article>
+        <article class="rv d2">
+          <div class="num">03</div>
+          <h3>টপ ১০০ নয়, টপ ৫০০ লক্ষ্য</h3>
+          <p>সেরা ১০০-তে ঢোকার জন্য হয়তো আমরা তোমাকে সাহায্য করতে পারব না, তবে আমরা এটা নিশ্চিত করব যাতে তুমি তোমার স্বপ্নের বিশ্ববিদ্যালয়ে অন্তত চান্স পেয়ে আসতে পারো। EDED কে সবাই চেনে এটার জন্যই!</p>
+        </article>
+      </div>
+      <div class="stat-strip rv">
+        <div><b>৮০%</b><span>কমন, টানা ৩ বছর</span></div>
+        <div><b>২–৩ ঘণ্টা</b><span>প্রতি অধ্যায়ে</span></div>
+        <div><b>৩টি</b><span>বিষয়: Phy · Chem · Math</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEEKLY TRACKER ============ -->
+  <section class="section">
+    <div class="wrap tracker">
+      <div class="rv">
+        <span class="kicker">03 · Catch up</span>
+        <h2 class="h2 bn">উদ্ভাস উইকলির পড়া জমে যাচ্ছে?</h2>
+        <span class="try">Try EDED</span>
+        <p class="sub bn" style="margin-top:18px">উইকলি ১–৫ এর ক্লাস আমাদের ড্যাশবোর্ডে অ্যাড করা আছে। যেখান থেকে পিছিয়ে আছো, সেখান থেকেই শুরু করো।</p>
+      </div>
+      <div class="tracker-card rv d1">
+        <div class="bar-lbl"><span>Weekly progress</span><span data-f="weeks-label">5 / 12</span></div>
+        <div class="bar"><i data-bar></i></div>
+        <div class="weeks" data-weeks></div>
+        <div class="legend">
+          <span><i style="background:var(--ink)"></i>কমপ্লিট</span>
+          <span><i style="background:var(--red)"></i>Class uploaded</span>
+          <span><i style="background:var(--paper);border:1px solid var(--line-2)"></i><span data-f="weeks-left">বাকি: ৭টি উইকলি</span></span>
+        </div>
+        <p class="tracker-foot"><span aria-hidden="true">🎯</span><span>শেষ গন্তব্য: কাঙ্ক্ষিত ক্যাম্পাস</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMOS ============ -->
+  <section class="section alt" id="hsc-demos">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="head rv">
+          <span class="kicker">04 · Demo classes</span>
+          <h2 class="h2">See how we teach, <em>before you enroll</em></h2>
+        </div>
+        <a class="link rv" href="https://www.youtube.com/playlist?list=PLYruNlr8Icod_D7D7ZppLL_tG9Bk36CDl" target="_blank" rel="noopener">All demos on YouTube →</a>
+      </div>
+      <div class="vids">
+        <article class="vid rv">
+          <div class="player" data-yt="GiE2UwAeBEY">
+            <button type="button" aria-label="Play: রাসায়নিক পরিবর্তন, Engineering QB solving">
+              <img src="https://i.ytimg.com/vi/GiE2UwAeBEY/hq720.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/GiE2UwAeBEY/hqdefault.jpg'">
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            </button>
+          </div>
+          <div class="cap"><div><small>Chemistry · Engineering QB</small><h3>রাসায়নিক পরিবর্তন</h3></div><span>EDED Group</span></div>
+        </article>
+        <article class="vid rv d1">
+          <div class="player" data-yt="YeDrZDUsgCk">
+            <button type="button" aria-label="Play: রাসায়নিক পরিবর্তন, Varsity QB solving">
+              <img src="https://i.ytimg.com/vi/YeDrZDUsgCk/hq720.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/YeDrZDUsgCk/hqdefault.jpg'">
+              <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            </button>
+          </div>
+          <div class="cap"><div><small>Chemistry · Varsity QB</small><h3>রাসায়নিক পরিবর্তন</h3></div><span>EDED Group</span></div>
+        </article>
+      </div>
+
+      <p class="kicker rv" style="margin-top:48px;color:var(--muted)">Foundation demo classes</p>
+      <div class="foundation">
+        <a class="fd rv" href="https://www.youtube.com/playlist?list=PLYruNlr8Icod_D7D7ZppLL_tG9Bk36CDl" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span><small>Physics</small><b>Magnetic Effect of Current & Magnetism</b></span>
+        </a>
+        <a class="fd rv d1" href="https://www.youtube.com/playlist?list=PLYruNlr8Icod_D7D7ZppLL_tG9Bk36CDl" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span><small>Higher Math</small><b class="bn">বিন্যাস সমাবেশ</b></span>
+        </a>
+        <a class="fd rv d2" href="https://www.youtube.com/playlist?list=PLYruNlr8Icod_D7D7ZppLL_tG9Bk36CDl" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span><small>Chemistry</small><b>Organic Chemistry</b></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUET SCRIPT ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head center rv">
+        <span class="kicker">05 · Inside the exam</span>
+        <h2 class="h2 bn">বুয়েট ভর্তি পরীক্ষার খাতা দেখতে কেমন?</h2>
+      </div>
+      <article class="vid wide rv">
+        <div class="player" data-yt="26ZwWh6K5LM">
+          <button type="button" aria-label="Play: বুয়েট ভর্তি পরীক্ষার খাতা দেখতে কেমন?">
+            <img src="https://i.ytimg.com/vi/26ZwWh6K5LM/hq720.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/26ZwWh6K5LM/hqdefault.jpg'">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ FREE RESOURCES ============ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="kicker">06 · Free resources</span>
+        <h2 class="h2">Notes & guides, <em>on the house</em></h2>
+      </div>
+      <div class="res">
+        <div class="res-card rv">
+          <h3>5 steps verified PDF</h3>
+          <p>A step-by-step admission roadmap for each track.</p>
+          <div class="res-links">
+            <a href="https://drive.google.com/file/d/13L6cgHUuq6rpxNiRHE43tTQTm8pkSrrO/view?usp=sharing" target="_blank" rel="noopener"><span>Engineering</span><span>↗</span></a>
+            <a href="https://drive.google.com/file/d/111aGiKBjRa2Um4Xbvi5cr6vR2leCqwss/view?usp=sharing" target="_blank" rel="noopener"><span>Varsity</span><span>↗</span></a>
+          </div>
+        </div>
+        <div class="res-card rv d1">
+          <h3>Compact Notes</h3>
+          <p>Chapter-wise short notes for last-minute revision.</p>
+          <div class="res-links three">
+            <a href="https://drive.google.com/file/d/1m4Yg-94tRBB-bK_OgMbk4G8EgggTUYjK/view?usp=drive_link" target="_blank" rel="noopener"><em>📐</em><span>Math</span><small>Notes ↗</small></a>
+            <a href="https://drive.google.com/file/d/1x2HYzEZX9xdHu_06z0LoR95zPAFfm-Ls/view?usp=sharing" target="_blank" rel="noopener"><em>⚡</em><span>Physics</span><small>Notes ↗</small></a>
+            <a href="https://drive.google.com/file/d/1pfwc4EPgDpP2SgZdJitsyJoMDu_xMnhy/view?usp=sharing" target="_blank" rel="noopener"><em>🧪</em><span>Chemistry</span><small>Notes ↗</small></a>
+          </div>
+          <a class="link res-all" href="https://drive.google.com/drive/folders/1m1LCIBT6zzXGXuMEKvsYdNBdLcQjCsx9?usp=drive_link" target="_blank" rel="noopener">Download all notes →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="section" style="padding-bottom:56px">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="head rv">
+          <span class="kicker bn">শিক্ষার্থীদের প্রতিক্রিয়া</span>
+          <h2 class="h2">What our <em>students</em> say</h2>
+        </div>
+        <div class="scroll-btns">
+          <button type="button" data-scroll="-1" aria-label="Scroll reviews left">←</button>
+          <button type="button" data-scroll="1" aria-label="Scroll reviews right">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="reviews" data-reviews></div>
+    <div class="lightbox" data-lightbox role="dialog" aria-label="Student review">
+      <button type="button" aria-label="Close">×</button>
+      <img alt="Student review">
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section dark" style="padding-bottom:120px">
+    <div class="wrap contact">
+      <div class="rv">
+        <span class="kicker" style="color:#e8b86b">Questions?</span>
+        <h2 class="h2">Talk to us before you <em style="color:#e8b86b">decide</em></h2>
+        <p class="sub bn" style="margin-left:auto;margin-right:auto">কোন ব্যাচ তোমার জন্য ঠিক, বুঝতে পারছো না? WhatsApp এ মেসেজ দাও।</p>
+      </div>
+      <div class="contact-actions rv d1">
+        <a class="wa" href="https://wa.me/8801410931431" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.7-.6z"/></svg></span>
+          <span><small>WhatsApp</small><b>01410-931-431</b></span>
+        </a>
+        <a class="btn btn-red btn-block" href="#hsc-courses">See the batches →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STICKY MOBILE CTA ============ -->
+  <div class="sticky" data-sticky>
+    <span><b data-f="sticky-price">2570৳</b><s data-f="sticky-regular">3070৳</s></span>
+    <a class="btn btn-red" href="#hsc-courses">Enroll now</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById("hsc26");
+  if (!root) return;
+  var $ = function (s, el) { return (el || root).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || root).querySelectorAll(s)); };
+  var bnDigits = function (n) { return String(n).replace(/\d/g, function (d) { return "০১২৩৪৫৬৭৮৯"[d]; }); };
+  var d = root.dataset;
+
+  /* Offer values */
+  var price = +d.price, regular = +d.regular, off = +d.off;
+  $('[data-f="price"]').innerHTML = price + "<small>৳</small>";
+  $('[data-f="regular"]').textContent = regular + "৳";
+  $('[data-f="save"]').textContent = "Save " + (regular - price) + "৳";
+  $('[data-f="off"]').textContent = bnDigits(off) + " টাকা";
+  $('[data-f="coupon"]').textContent = d.coupon;
+  $('[data-f="sticky-price"]').textContent = price + "৳";
+  $('[data-f="sticky-regular"]').textContent = regular + "৳";
+
+  /* Coupon copy */
+  var coupon = $("[data-copy]"), label = $("[data-copy-label]");
+  coupon.addEventListener("click", function () {
+    var done = function () {
+      coupon.classList.add("copied"); label.textContent = "কপি হয়েছে ✓";
+      setTimeout(function () { coupon.classList.remove("copied"); label.textContent = "কপি করো"; }, 2200);
+    };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(d.coupon).then(done, done);
+    else {
+      var t = document.createElement("textarea"); t.value = d.coupon; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      t.remove(); done();
+    }
+  });
+
+  /* Countdown: data-deadline, or the end of the current month */
+  var now = new Date();
+  var end = d.deadline ? new Date(d.deadline) : new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  var cells = $$("[data-count] b");
+  var tick = function () {
+    var s = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60].forEach(function (v, i) {
+      cells[i].textContent = String(v).padStart(2, "0");
+    });
+  };
+  tick(); setInterval(tick, 1000);
+
+  /* Weekly tracker */
+  var done = +d.weeksDone, total = +d.weeksTotal, html = "";
+  for (var i = 1; i <= total; i++) html += '<div class="' + (i < done ? "done" : i === done ? "now" : "") + '">W' + i + "</div>";
+  $("[data-weeks]").innerHTML = html;
+  $('[data-f="weeks-label"]').textContent = done + " / " + total;
+  $('[data-f="weeks-left"]').textContent = "বাকি: " + bnDigits(total - done) + "টি উইকলি";
+
+  /* YouTube: load the player only on click */
+  $$("[data-yt]").forEach(function (p) {
+    p.querySelector("button").addEventListener("click", function () {
+      p.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + p.dataset.yt +
+        '?autoplay=1&rel=0&modestbranding=1" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    });
+  });
+
+  /* Reviews */
+  var U = "https://ededcourses.com/wp-content/uploads/2026/04/Screenshot_";
+  var shots = ["20260422-192827.jpg", "20260421-220439.png", "20260418-211717.png", "20260418-211833.png",
+    "20260418-211917.png", "20260418-211949.png", "20260418-212103.png", "20260418-212115.png",
+    "20260418-212144.png", "20260418-212222.png", "20260414-190503.png", "20260414-190444.png",
+    "20260413-154145.png", "20260413-202101.png", "20260413-202118.png", "20260413-202127.png",
+    "20260222-171408.png", "20260221-174504.png", "20260221-174509.png", "20260219-153416.png",
+    "20260219-153425.png", "20260219-153612.png", "20260219-153937.png", "20260218-052956.png",
+    "20260216-145251.png", "20260215-163727.png", "20260215-163804.png", "20260213-062531.png",
+    "20260213-062538.png", "20260213-062627.png", "20260213-062820.png", "20260213-062947.png",
+    "20260210-123040.png", "20260210-222356.png", "20260209-182449.png", "20260209-233300.png",
+    "20260209-233305.png", "20260209-233310.png", "20260209-233314.png", "20260208-150858.png",
+    "20260208-150909.png", "20260208-230940.png", "20260207-220728.png", "20260205-183402.png",
+    "20260202-181003.png", "20260201-201238.png"];
+  var rev = $("[data-reviews]");
+  rev.innerHTML = shots.map(function (f) {
+    var thumb = f.replace(/\.(png|jpg)$/, (/\.jpg$/.test(f) ? "-566x1024" : "-461x1024") + ".$1");
+    return '<button type="button" data-full="' + U + f + '" aria-label="Open student review"><img src="' + U + thumb + '" alt="Student review" loading="lazy"></button>';
+  }).join("");
+  var lb = $("[data-lightbox]");
+  rev.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    $("img", lb).src = b.dataset.full; lb.classList.add("open");
+  });
+  lb.addEventListener("click", function () { lb.classList.remove("open"); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") lb.classList.remove("open"); });
+  $$("[data-scroll]").forEach(function (b) {
+    b.addEventListener("click", function () { rev.scrollBy({ left: +b.dataset.scroll * rev.clientWidth * .8, behavior: "smooth" }); });
+  });
+
+  /* Reveal on scroll + progress bar */
+  var bar = $("[data-bar]");
+  var show = function (el) {
+    el.classList.add("in");
+    if (el.contains(bar)) bar.style.width = (done / total * 100) + "%";
+  };
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+    $$(".rv").forEach(function (el) { io.observe(el); });
+  } else $$(".rv").forEach(show);
+
+  /* Sticky CTA: show after the hero, hide while the offer or courses are on screen */
+  var sticky = $("[data-sticky]"), hero = $(".hero"), offer = $("#hsc-offer"), courses = $("#hsc-courses");
+  var inView = function (el) { var r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };
+  var onScroll = function () {
+    sticky.classList.toggle("show", hero.getBoundingClientRect().bottom < 0 && !inView(offer) && !inView(courses));
+  };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+})();
+</script>
