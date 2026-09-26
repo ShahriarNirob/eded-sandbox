@@ -10,6 +10,7 @@ All content comes from the live WordPress site: Tutor LMS courses, WooCommerce p
 | --- | --- |
 | `index.html` | Home: hero, HSC 26/27/28 batch picker, course sections, why EDED, student reviews, mentors |
 | `courses.html` | All courses with category filters and search (`?cat=admission\|aca2ad\|revision\|a2z\|other`); older HSC 24/25 batches are in a collapsed section |
+| `hsc26-landing.html` | Standalone HSC 26 Compact Admission landing page (light, editorial design). Self-contained and scoped under `.hsc`, so it can be pasted into one Elementor "Custom HTML" widget; offer, coupon, countdown and weekly tracker are set by `data-*` attributes at the top |
 | `batch.html?b=26` | HSC batch landing page (26, 27, 28): price, coupon, countdown, demo classes, courses in the batch |
 | `shop.html` | Compact Publications: hand-notes and e-books |
 | `mentors.html` | Mentor team with booking links |
