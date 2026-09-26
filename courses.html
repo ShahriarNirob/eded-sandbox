@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Courses | EDED GROUP</title>
+  <meta name="description" content="Browse every EDED GROUP course: admission, academic to admission, revision and pocket revision material.">
+  <meta name="theme-color" content="#07080b">
+  <link rel="icon" href="https://ededcourses.com/wp-content/uploads/2025/12/cropped-EDED_YT_WATERMARK-removebg-1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="courses">
+  <main>
+
+    <section class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="container" style="position:relative">
+        <span class="eyebrow">Courses</span>
+        <h1>All courses</h1>
+        <p>Pick a category or search by subject. Enrollment and payment (bKash, SSLCommerz) happen on your EDED account.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:12px">
+      <div class="container">
+        <div class="toolbar">
+          <label class="search"><span aria-hidden="true">🔍</span><input id="search" type="search" placeholder="Search courses, e.g. Physics, Engineering" aria-label="Search courses"></label>
+          <span id="result-count" class="chip"></span>
+        </div>
+        <div class="filters" id="filters" style="margin-bottom:28px"></div>
+        <div class="grid" id="course-grid"></div>
+        <details class="legacy" id="legacy">
+          <summary>Previous batches (HSC 24 &amp; 25), for enrolled students</summary>
+          <div class="grid" id="legacy-grid" style="margin-top:12px"></div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
