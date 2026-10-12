@@ -190,13 +190,9 @@ svg { display: block; }
 .thumb { display: block; margin: 24px auto 26px; width: min(100%, 300px); padding: 8px; background: #fff; border: 1px solid rgba(197,160,89,.6); box-shadow: 0 14px 30px rgba(80,30,30,.18); transform: rotate(-1.5deg); transition: transform .4s var(--ease); }
 .thumb img { width: 100%; height: auto; display: block; }
 .viewer .thumb[data-reveal].in { transform: rotate(-1.5deg); }
+.viewer { padding-bottom: 112px; }
 @media (hover: hover) { .thumb:hover { transform: rotate(0) scale(1.02) !important; } }
 
-.foot { padding: 12px 28px 96px; text-align: center; }
-.foot-rule { display: block; width: 56px; height: 1px; margin: 0 auto 18px; background: var(--gold); }
-.foot-credit { font-size: 10.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
-.foot-credit a { color: var(--crimson); font-weight: 600; text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid rgba(168,32,52,.4); transition: color .25s, border-color .25s; }
-.foot-credit a:hover, .foot-credit a:focus-visible { color: var(--burgundy); border-bottom-color: var(--gold-hi); outline: none; }
 
 /* ---------- music button ---------- */
 .music { position: absolute; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 10; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; color: var(--crimson);
@@ -389,10 +385,6 @@ dialog::backdrop { background: rgba(30,8,12,.6); backdrop-filter: blur(6px); }
         <button class="btn" type="button" data-open-card data-reveal style="--i:2"><svg><use href="#i-card"/></svg>View Formal Wedding Card</button>
       </section>
 
-      <footer class="foot">
-        <span class="foot-rule"></span>
-        <p class="foot-credit">Crafted by <a href="https://www.timario.dev" target="_blank" rel="noopener noreferrer">Timario</a></p>
-      </footer>
     </div>
 
     <!-- ============ MUSIC ============ -->
